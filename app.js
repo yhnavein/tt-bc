@@ -1,3 +1,3 @@
-angular.module('tt-bc', ['mwl.calendar']);
+angular.module('tt-bc', []);
 
 moment.locale('pl');

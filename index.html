@@ -8,13 +8,49 @@
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
   </head>
   <body>
     <div class="container" ng-controller="mainCtrl">
       <h1>Generator</h1>
-      <h3>{{ calendarTitle }}</h3>
+
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="fullName" class="col-sm-5 control-label">Imię Nazwisko</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="fullName" ng-model="timesheet.basic.fullName">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="title" class="col-sm-5 control-label">Stanowisko</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="title" placeholder=".NET Developer" ng-model="timesheet.basic.title">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="manager" class="col-sm-5 control-label">Przełożony</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="manager" ng-model="timesheet.basic.manager">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="client" class="col-sm-5 control-label">Miejsce świadczenia usług</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="client" ng-model="timesheet.basic.client">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary pull-right" ng-click="saveBasicData()">Zapisz</button>
+        </div>
+      </form>
+      <!-- <h3>{{ calendarTitle }}</h3>
       <div class="btn-group">
         <button class="btn btn-default" mwl-date-modifier date="calendarDay" decrement="calendarView">
           &laquo;
@@ -25,30 +61,43 @@
         <button class="btn btn-default" mwl-date-modifier date="calendarDay" increment="calendarView">
           &raquo;
         </button>
+      </div> -->
+
+
+      <div class="calendar">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>Dzień</th>
+              <th>Typ</th>
+              <th>Opis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="day in days">
+              <td>{{day.label}}</td>
+              <td>{{day.dayType}}</td>
+              <td>{{day.dayDesc}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <mwl-calendar
-          view="calendarView"
-          current-day="calendarDay"
-          events="events"
-          view-title="calendarTitle"
-          on-event-click="eventClicked(calendarEvent)"
-          on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-          edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-          delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
-          on-edit-event-click="eventEdited(calendarEvent)"
-          on-delete-event-click="eventDeleted(calendarEvent)"
-          cell-is-open="true">
-      </mwl-calendar>
+
+      <div class="main-controls">
+        <button class="btn btn-primary btn-lg" ng-click="saveAndPrint()">Przejdź do wydruku &raquo;</button>
+      </div>
+
     </div>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/sugar/release/sugar.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/moment/locale/pl.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="vendor/angular-bootstrap-calendar.js"></script>
     <script src="app.js"></script>
     <script src="calendarService.js"></script>
+    <script src="calendarHelper.js"></script>
     <script src="mainCtrl.js"></script>
   </body>
 </html>

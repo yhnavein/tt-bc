@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tt-bc">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TimeSheet Gen</title>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+  </head>
+  <body ng-controller="printCtrl">
+
+
+    <div class="container theme-showcase container-a4">
+      <h1 class="title">
+        Karta ewidencji świadczenia usług
+      </h1>
+
+      <dl class="dl-horizontal basic-stuff">
+        <dt>Imię i nazwisko:</dt>
+        <dd>{{timesheet.basic.fullName}}</dd>
+        <dt>Stanowisko:</dt>
+        <dd>{{timesheet.basic.title}}</dd>
+        <dt>Przełożony:</dt>
+        <dd>{{timesheet.basic.manager}}</dd>
+        <dt>Miejsce świadczenia usług:</dt>
+        <dd>{{timesheet.basic.client}}</dd>
+      </dl>
+
+      <table class="table table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th>Dzień</th>
+            <th>Opis wykonywanych zadań</th>
+            <th>N/Ś</th>
+            <th>S</th>
+            <th>U</th>
+            <th>Ch</th>
+            <th>Sz</th>
+            <th>P</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="day in timesheet.days">
+            <td>{{day.label}}</td>
+            <td>Test</td>
+            <td>{{ (day.dayType === 3 || day.dayType === 1) ? 'x' : '' }}</td>
+            <td>{{ (day.dayType === 2) ? 'x' : '' }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ (!day.dayType) ? '8h' : '' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="bower_components/sugar/release/sugar.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/moment/locale/pl.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="calendarService.js"></script>
+    <script src="calendarHelper.js"></script>
+    <script src="mainCtrl.js"></script>
+  </body>
+</html>
