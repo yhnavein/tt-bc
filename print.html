@@ -7,7 +7,7 @@
     <title>TimeSheet Gen</title>
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="print.css" rel="stylesheet">
   </head>
   <body ng-controller="printCtrl">
 
@@ -31,25 +31,25 @@
       <table class="table table-condensed table-bordered">
         <thead>
           <tr>
-            <th>Dzień</th>
+            <th style="width: 60px;">Dzień</th>
             <th>Opis wykonywanych zadań</th>
-            <th>N/Ś</th>
-            <th>S</th>
-            <th>U</th>
-            <th>Ch</th>
-            <th>Sz</th>
-            <th>P</th>
+            <th style="width: 40px;">N/Ś</th>
+            <th style="width: 40px;">S</th>
+            <th style="width: 40px;">U</th>
+            <th style="width: 40px;">Ch</th>
+            <th style="width: 40px;">Sz</th>
+            <th style="width: 40px;">P</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="day in timesheet.days">
             <td>{{day.label}}</td>
             <td>Test</td>
-            <td>{{ (day.dayType === 3 || day.dayType === 1) ? 'x' : '' }}</td>
-            <td>{{ (day.dayType === 2) ? 'x' : '' }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td class="cell-x">{{ (day.dayType === 3 || day.dayType === 1) ? '&times;' : '' }}</td>
+            <td class="cell-x">{{ (day.dayType === 2) ? '&times;' : '' }}</td>
+            <td class="cell-x"></td>
+            <td class="cell-x"></td>
+            <td class="cell-x"></td>
             <td>{{ (!day.dayType) ? '8h' : '' }}</td>
           </tr>
         </tbody>

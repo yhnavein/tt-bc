@@ -1,0 +1,65 @@
+.container-a4 {
+  width: 900px;
+}
+
+h1.title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #000;
+  margin-bottom: 12px;
+}
+
+.basic-stuff .bordered {
+  display: inline-block;
+  width: 120px;
+  border: 1px solid #ccc;
+  padding: 2px 4px;
+  margin-right: 24px;
+}
+
+.some-statement {
+  margin-top: 48px;
+}
+
+.delegation-time {
+  margin: 24px 0 12px;
+}
+
+.container-a4 h3 {
+  font-size: 16px;
+  margin-top: 24px 0 12px;
+}
+
+.alert-container {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  left: 32px;
+}
+.alert-container .alert { vertical-align: top; }
+.alert-container .glyphicon { font-size: 18px; margin-right: 8px; }
+
+.table tr.summary td { font-weight: bold; text-align: right; }
+.table td.price { text-align: right; }
+.table thead th { text-align: center; }
+
+.table .cell-x {
+  text-align: center;
+  font-weight: bold;
+  padding: 1px 0 0 0;
+  font-size: 20px;
+}
+
+em.eng { font-size: 80%; font-weight: normal; }
+
+@media print {
+  .dl-horizontal dt {
+    float: left;
+    width: 200px;
+    text-align: right;
+  }
+  .dl-horizontal dd { margin-left: 220px; }
+
+  .not-printable { display: none; }
+}
