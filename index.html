@@ -9,19 +9,20 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
   </head>
   <body>
     <div class="container" ng-controller="mainCtrl">
-      <h1>Generator TimeSheetów</h1>
+      <h1>Generator</h1>
       <h3>{{ calendarTitle }}</h3>
       <div class="btn-group">
-        <button class="btn btn-primary" mwl-date-modifier date="calendarDay" decrement="calendarView">
+        <button class="btn btn-default" mwl-date-modifier date="calendarDay" decrement="calendarView">
           &laquo;
         </button>
         <button class="btn btn-default" mwl-date-modifier date="calendarDay" set-to-today>
           Dziś
         </button>
-        <button class="btn btn-primary" mwl-date-modifier date="calendarDay" increment="calendarView">
+        <button class="btn btn-default" mwl-date-modifier date="calendarDay" increment="calendarView">
           &raquo;
         </button>
       </div>
@@ -45,7 +46,7 @@
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/moment/locale/pl.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+    <script src="vendor/angular-bootstrap-calendar.js"></script>
     <script src="app.js"></script>
     <script src="calendarService.js"></script>
     <script src="mainCtrl.js"></script>
