@@ -29,6 +29,12 @@
                 <input type="text" class="form-control" id="title" placeholder=".NET Developer" ng-model="timesheet.basic.title">
               </div>
             </div>
+            <div class="form-group">
+              <label for="projName" class="col-sm-5 control-label">Nazwa projektu</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="projName" ng-model="timesheet.basic.projectName">
+              </div>
+            </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
@@ -43,11 +49,10 @@
                 <input type="text" class="form-control" id="client" ng-model="timesheet.basic.client">
               </div>
             </div>
+            <div class="form-group">
+              <button class="btn btn-primary pull-right" ng-click="saveBasicData()">Zapisz</button>
+            </div>
           </div>
-        </div>
-
-        <div class="form-group">
-          <button class="btn btn-primary pull-right" ng-click="saveBasicData()">Zapisz</button>
         </div>
       </form>
       <!-- <h3>{{ calendarTitle }}</h3>
@@ -65,22 +70,30 @@
 
 
       <div class="calendar">
-        <table class="table table-condensed">
-          <thead>
-            <tr>
-              <th>Dzień</th>
-              <th>Typ</th>
-              <th>Opis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="day in days">
-              <td>{{day.label}}</td>
-              <td>{{day.dayType}}</td>
-              <td>{{day.dayDesc}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="row">
+          <div class="col-sm-6">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th>Dzień</th>
+                  <th>Opis</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="day in days" ng-class="{ 'is-weekend': day.isWeekend }">
+                  <td>{{day.label}}</td>
+                  <td>{{day.dayDesc}}</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-6">
+            <legend>Urlopy</legend>
+
+          </div>
+        </div>
       </div>
 
       <div class="main-controls">

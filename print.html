@@ -17,16 +17,28 @@
         Karta ewidencji świadczenia usług
       </h1>
 
-      <dl class="dl-horizontal basic-stuff">
-        <dt>Imię i nazwisko:</dt>
-        <dd>{{timesheet.basic.fullName}}</dd>
-        <dt>Stanowisko:</dt>
-        <dd>{{timesheet.basic.title}}</dd>
-        <dt>Przełożony:</dt>
-        <dd>{{timesheet.basic.manager}}</dd>
-        <dt>Miejsce świadczenia usług:</dt>
-        <dd>{{timesheet.basic.client}}</dd>
-      </dl>
+      <div class="row">
+        <div class="col-xs-6">
+          <dl class="dl-horizontal basic-stuff">
+            <dt>Imię i nazwisko:</dt>
+            <dd>{{timesheet.basic.fullName}}</dd>
+            <dt>Stanowisko:</dt>
+            <dd>{{timesheet.basic.title}}</dd>
+            <dt>Przełożony:</dt>
+            <dd>{{timesheet.basic.manager}}</dd>
+            <dt>Miejsce świadczenia usług:</dt>
+            <dd>{{timesheet.basic.client}}</dd>
+          </dl>
+        </div>
+        <div class="col-xs-6">
+          <dl class="dl-horizontal basic-stuff">
+            <dt>Miesiąc:</dt>
+            <dd>{{timesheet.date.month}} - {{timesheet.date.month | monthName}}</dd>
+            <dt>Rok:</dt>
+            <dd>{{timesheet.date.year}}</dd>
+          </dl>
+        </div>
+      </div>
 
       <table class="table table-condensed table-bordered">
         <thead>
@@ -42,19 +54,42 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="day in timesheet.days">
+          <tr ng-repeat="day in timesheet.days" ng-class="{'day-off': day.dayType > 0}">
             <td>{{day.label}}</td>
-            <td>Test</td>
-            <td class="cell-x">{{ (day.dayType === 3 || day.dayType === 1) ? '&times;' : '' }}</td>
-            <td class="cell-x">{{ (day.dayType === 2) ? '&times;' : '' }}</td>
+            <td>{{ (!day.dayType) ? timesheet.basic.projectName : ''}}</td>
+            <td class="cell-x"></td>
+            <td class="cell-x"></td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
             <td>{{ (!day.dayType) ? '8h' : '' }}</td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="6">Suma:</th>
+            <th colspan="2" style="text-align: right;">{{ timesheet.hours }}h</th>
+          </tr>
+
+        </tfoot>
       </table>
+
+      <p>
+        N Ś – niedziele i święta, godziny 22:00 -7:00, S – sobota, U – urlop, Ch – choroba, Sz – szkolenia,  P - praca
+      </p>
+
+      <div class="row row-signatures">
+        <div class="col-xs-6">
+          <div>....................................</div>
+          <div>Podpis przełożonego</div>
+        </div>
+        <div class="col-xs-6">
+          <div>....................................</div>
+          <div>Podpis pracownika</div>
+        </div>
+      </div>
     </div>
+
 
     <script src="bower_components/sugar/release/sugar.min.js"></script>
     <script src="bower_components/moment/moment.js"></script>

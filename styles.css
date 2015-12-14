@@ -1,3 +1,13 @@
 .cal-month-day.cal-day-weekend {
 	background: rgba(180,80,200, 0.05);
 }
+
+.table tr.is-weekend td {
+	background: #eee;
+}
+
+.main-controls .btn {
+	position: fixed;
+	bottom: 12px;
+	right: 12px;
+}
