@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TimeSheet Gen</title>
 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="custom-bootstrap.css" rel="stylesheet">
     <link href="print.css" rel="stylesheet">
   </head>
   <body ng-controller="printCtrl">
@@ -67,7 +67,8 @@
         </tbody>
         <tfoot>
           <tr>
-            <th colspan="6">Suma:</th>
+            <th colspan="4">Suma:</th>
+            <th colspan="2" style="text-align: right;">{{ timesheet.daysSummary || 0 }} dni</th>
             <th colspan="2" style="text-align: right;">{{ timesheet.hours }}h</th>
           </tr>
 

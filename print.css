@@ -45,7 +45,7 @@ h1.title {
 }
 
 .row-signatures {
-  margin-top: 24px;
+  margin-top: 86px;
 }
 
 .dl-horizontal dt {
@@ -61,5 +61,5 @@ h1.title {
 
 @media print {
   .not-printable { display: none; }
-  .table tr.day-off td { background: #aaa !important; border-color: #999 !important; }
+  .table tr.day-off td { background: #aaa !important; background-color: #aaa !important;  border-color: #999 !important; }
 }

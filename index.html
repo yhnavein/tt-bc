@@ -83,8 +83,10 @@
               <tbody>
                 <tr ng-repeat="day in days" ng-class="{ 'is-weekend': day.isWeekend }">
                   <td>{{day.label}}</td>
-                  <td>{{day.dayDesc}}</td>
-                  <td></td>
+                  <td>{{day.dayDesc}} {{day.dayType | dayTypeName}}</td>
+                  <td style="text-align: right;">
+                    <a class="btn btn-xs btn-default" ng-click="markVacation(day)" ng-class="{'btn-primary': day.dayType == 5}">Urlop</a>
+                  </td>
                 </tr>
               </tbody>
             </table>

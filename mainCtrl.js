@@ -16,16 +16,21 @@ angular.module('tt-bc')
 	var days = calendarHelper.getMonthView($scope.timesheet.calendarDay);
 	$scope.days = calendarService.fillDays(days);
 
-	function sumHours() {
-		var workingDays = $scope.days.count(function(el) {
+	function sumDays() {
+		return $scope.days.count(function(el) {
 			return el.dayType == null || el.dayType < 1;
 		});
-
-		return workingDays * 8;
 	}
 
 	$scope.saveBasicData = function() {
 		localStorage.setItem('basicData', JSON.stringify($scope.timesheet.basic));
+	};
+
+	$scope.markVacation = function(day) {
+		if(day.dayType === 5)
+			day.dayType = null;
+		else
+			day.dayType = 5;
 	};
 
 	$scope.saveAndPrint = function() {
@@ -35,7 +40,9 @@ angular.module('tt-bc')
 			month: date.month() + 1,
 			year: date.year()
 		};
-		$scope.timesheet.hours = sumHours();
+		$scope.timesheet.daysSummary = sumDays();
+		$scope.timesheet.hours = sumDays() * 8;
+
 		localStorage.setItem('timesheet', JSON.stringify($scope.timesheet));
 		window.location = './print.html';
 	};
@@ -73,5 +80,16 @@ angular.module('tt-bc')
       return null;
 
     return monthsHashTable[monthNo];
+  };
+})
+.filter('dayTypeName', function() {
+  var typeNamesHashTable = {
+    '5': 'Urlop'
+  };
+  return function(dayType) {
+    if(!dayType)
+      return null;
+
+    return typeNamesHashTable[dayType];
   };
 });
