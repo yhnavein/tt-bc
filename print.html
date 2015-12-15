@@ -54,9 +54,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="day in timesheet.days" ng-class="{'day-off': day.dayType > 0}">
+          <tr ng-repeat="day in timesheet.days" ng-class="{'day-off': day.dayType > 0 && day.dayType < 4, 'day-vacation': day.dayType == 5}">
             <td>{{day.label}}</td>
-            <td>{{ (!day.dayType) ? timesheet.basic.projectName : ''}}</td>
+            <td>{{ (!day.dayType) ? timesheet.basic.projectName : ''}} {{day.dayType == 5 ? 'Urlop' : '' }}</td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
