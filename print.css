@@ -1,3 +1,7 @@
+body {
+  -webkit-print-color-adjust: exact;
+}
+
 .container-a4 {
   width: 900px;
 }
@@ -60,7 +64,19 @@ h1.title {
 }
 .dl-horizontal.basic-stuff dd { margin-left: 250px; }
 
+
+.alert-container {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  left: 32px;
+}
+.alert-container .alert { vertical-align: top; }
+.alert-container .glyphicon { font-size: 18px; margin-right: 8px; }
+
+
 @media print {
   .not-printable { display: none; }
-  .table tr.day-off td { background: #aaa !important; background-color: #aaa !important;  border-color: #999 !important; }
+  .table tr.day-off td { background: #bbb !important; background-color: #bbb !important;  border-color: #999 !important; }
+  .not-printable { display: none; }
 }

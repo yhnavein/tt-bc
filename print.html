@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="tt-bc">
+<html lang="en" ng-app="tt-bc" ng-controller="printCtrl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TimeSheet Gen</title>
+    <title>{{timesheet.basic.fullName}} - Timesheet, {{timesheet.date.month}}-{{timesheet.date.year}}</title>
 
+    <link href="custom-bootstrap.css" rel="stylesheet">
     <link href="custom-bootstrap.css" rel="stylesheet">
     <link href="print.css" rel="stylesheet">
   </head>
-  <body ng-controller="printCtrl">
-
+  <body>
+    <div class="alert-container not-printable">
+      <a href="/" class="btn btn-sm btn-default pull-left ng-scope" title="Kliknij aby powrócić do poprzedniego formularza" data-placement="right" data-type="warning">
+        <span class="glyphicon glyphicon-hand-left"></span>
+      </a>
+      <div class="alert alert-info pull-right">
+        <span class="glyphicon glyphicon-print"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-left: 16px;">×</button>
+        Wygląda w porządku? To drukuj stronę! (Ctrl+P)
+      </div>
+    </div>
 
     <div class="container theme-showcase container-a4">
       <h1 class="title">
