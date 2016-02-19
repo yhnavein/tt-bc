@@ -3,6 +3,17 @@ angular.module('tt-bc')
 	$scope.timesheet = {
 		calendarDay: new Date()
 	};
+	$scope.curMonth = moment().month() + 1;
+
+	$scope.weekDays = [
+		'Poniedziałek',
+		'Wtorek',
+		'Środa',
+		'Czwartek',
+		'Piatek',
+		'Sobota',
+		'Niedziela'
+	];
 
 	function loadBasicData() {
 		var data = localStorage.getItem('basicData');
@@ -91,5 +102,10 @@ angular.module('tt-bc')
       return null;
 
     return typeNamesHashTable[dayType];
+  };
+})
+.filter('capitalize', function() {
+  return function(input) {
+    return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
   };
 });

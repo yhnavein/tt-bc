@@ -11,3 +11,75 @@
 	bottom: 12px;
 	right: 12px;
 }
+
+.month-title {
+	text-align: center;
+	margin: 18px 0;
+	font-size: 22px;
+}
+.calendar {
+	width: 720px;
+	box-sizing: border-box;
+}
+
+.weekDays .weekDay {
+	float: left;
+	width: calc(100% / 7);
+	box-sizing: border-box;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 5px;
+  color: #666;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+  background: #f7f7f7;
+  border: 1px solid;
+  border-color: #fff #bbbbbb #bbbbbb #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#f1f1f1));
+}
+
+.calendar .calDay {
+	float: left;
+	width: calc(100% / 7);
+	height: 100px;
+	box-sizing: border-box;
+	padding: 8px;
+	border: 1px solid #efefef;
+	position: relative;
+	font-size: 16px;
+	color: #666;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+	border-color: #fff #bbbbbb #bbbbbb #fff;
+  background: #ededed;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#dedede));
+}
+.calendar .calDay .day {
+	font-weight: bold;
+}
+.calendar .calDay .title {
+	margin: 0 -8px;
+	border: 1px solid rgba(0,0,0,.2);
+	border-left: 0;
+	border-right: 0;
+}
+.calendar .calDay .controls {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 8px;
+	font-size: 11px;
+}
+
+.calendar .calDay.outside-scope {
+	color: #ccc;
+	background: #f5f5f5;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#ececec));
+}
+.calendar .calDay.weekend {
+	background: #D4E7EA;
+	background: -webkit-gradient(linear, left top, left bottom, from(#E7F1F3), to(#CDDEE0));
+}
+.calendar .calDay.holidays {
+	background: #CDCDE0;
+	background: -webkit-gradient(linear, left top, left bottom, from(#E7E8F3), to(#CDCDE0));
+}

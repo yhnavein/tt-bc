@@ -69,31 +69,22 @@
       </div> -->
 
 
-      <div class="calendar">
-        <div class="row">
-          <div class="col-sm-6">
-            <table class="table table-condensed">
-              <thead>
-                <tr>
-                  <th>Dzień</th>
-                  <th>Opis</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="day in days" ng-class="{ 'is-weekend': day.isWeekend }">
-                  <td>{{day.label}}</td>
-                  <td>{{day.dayDesc}} {{day.dayType | dayTypeName}}</td>
-                  <td style="text-align: right;">
-                    <a class="btn btn-xs btn-default" ng-click="markVacation(day)" ng-class="{'btn-primary': day.dayType == 5}">Urlop</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col-sm-6">
-            <legend>Urlopy</legend>
+      <div class="calendar clearfix">
 
+        <h2 class="month-title">
+          {{curMonth | monthName | capitalize}}
+        </h2>
+
+        <div class="weekDays">
+          <div class="weekDay" ng-repeat="weekDay in weekDays">{{weekDay}}</div>
+        </div>
+
+        <div class="calDay" ng-repeat="day in days" ng-class="{'outside-scope': !day.inMonth, 'weekend': day.isWeekend, 'holidays': day.dayType === 5}">
+          <div class="day">{{day.label}}</div>
+          <div class="title" ng-show="day.dayDesc">{{day.dayDesc}}</div>
+
+          <div class="controls">
+            <a class="btn btn-xs btn-default" ng-click="markVacation(day)" ng-class="{'btn-primary': day.dayType == 5}">Urlop</a>
           </div>
         </div>
       </div>

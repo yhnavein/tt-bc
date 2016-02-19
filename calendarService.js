@@ -14,13 +14,25 @@ angular.module('tt-bc')
 
   var HOLIDAY = 1;
 
-  function findEaster(year) {
+  var easters = {
+    2016: { month: 3, day: 28 },
+    2017: { month: 4, day: 16 }
+  };
 
+  function findEaster(year) {
+    var easter = easters[year];
+
+    if(easter)
+      easter.name = 'Wielkanoc';
+
+    return easter;
   }
 
   return {
     findHolidays: function(month, year) {
       var result = [];
+
+      constHolidays.push(findEaster(year));
 
       angular.forEach(constHolidays, function(el) {
         if(month !== el.month)
@@ -33,13 +45,9 @@ angular.module('tt-bc')
     },
 
     fillDays: function(days) {
-      var result = days.filter(function(el) {
-        return el.inMonth;
-      });
-
-      var month = result.first().date.month() + 1;
+      var month = days.last().date.month() + 1;
       var thisMonthHolidays = constHolidays.filter(function(el) { return el.month === month; });
-      result.forEach(function(el) {
+      days.forEach(function(el) {
         for (var i = 0; i < thisMonthHolidays.length; i++) {
           if(el.label === thisMonthHolidays[i].day) {
             el.dayType = HOLIDAY;
@@ -49,7 +57,7 @@ angular.module('tt-bc')
         }
       });
 
-      return result;
+      return days;
     }
   };
 });
