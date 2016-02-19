@@ -55,36 +55,22 @@
           </div>
         </div>
       </form>
-      <!-- <h3>{{ calendarTitle }}</h3>
-      <div class="btn-group">
-        <button class="btn btn-default" mwl-date-modifier date="calendarDay" decrement="calendarView">
-          &laquo;
-        </button>
-        <button class="btn btn-default" mwl-date-modifier date="calendarDay" set-to-today>
-          Dziś
-        </button>
-        <button class="btn btn-default" mwl-date-modifier date="calendarDay" increment="calendarView">
-          &raquo;
-        </button>
-      </div> -->
-
 
       <div class="calendar clearfix">
-
         <h2 class="month-title">
-          {{curMonth | monthName | capitalize}}
+          {{curMonth | monthName | capitalize}} {{curDateJs | date:'yyyy'}}
         </h2>
 
         <div class="weekDays">
           <div class="weekDay" ng-repeat="weekDay in weekDays">{{weekDay}}</div>
         </div>
 
-        <div class="calDay" ng-repeat="day in days" ng-class="{'outside-scope': !day.inMonth, 'weekend': day.isWeekend, 'holidays': day.dayType === 5}">
+        <div class="calDay" ng-repeat="day in days" ng-class="{'outside-scope': !day.inMonth, 'weekend': day.isWeekend, 'vacation': day.isVacation, 'holidays': day.isHolidays}">
           <div class="day">{{day.label}}</div>
           <div class="title" ng-show="day.dayDesc">{{day.dayDesc}}</div>
 
-          <div class="controls">
-            <a class="btn btn-xs btn-default" ng-click="markVacation(day)" ng-class="{'btn-primary': day.dayType == 5}">Urlop</a>
+          <div class="controls" ng-hide="!day.inMonth">
+            <a class="btn btn-xs btn-default" ng-click="markVacation(day)" ng-class="{'btn-primary': day.isVacation}">Urlop</a>
           </div>
         </div>
       </div>
@@ -101,6 +87,7 @@
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/moment/locale/pl.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
+    <!-- <script src="bower_components/angular-i18n/angular-locale_pl.js"></script> -->
     <script src="app.js"></script>
     <script src="calendarService.js"></script>
     <script src="calendarHelper.js"></script>

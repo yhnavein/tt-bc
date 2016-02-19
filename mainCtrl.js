@@ -4,6 +4,8 @@ angular.module('tt-bc')
 		calendarDay: new Date()
 	};
 	$scope.curMonth = moment().month() + 1;
+	$scope.curDate = moment();
+	$scope.curDateJs = moment().toDate();
 
 	$scope.weekDays = [
 		'Poniedziałek',
@@ -25,11 +27,11 @@ angular.module('tt-bc')
 
 	$scope.timesheet = loadBasicData();
 	var days = calendarHelper.getMonthView($scope.timesheet.calendarDay);
-	$scope.days = calendarService.fillDays(days);
+	$scope.days = calendarService.fillDays(days, $scope.curDate);
 
 	function sumDays() {
 		return $scope.days.count(function(el) {
-			return el.dayType == null || el.dayType < 1;
+			return el.inMonth && !el.isHolidays && !el.isVacation && !el.isWeekend;
 		});
 	}
 
@@ -38,14 +40,11 @@ angular.module('tt-bc')
 	};
 
 	$scope.markVacation = function(day) {
-		if(day.dayType === 5)
-			day.dayType = null;
-		else
-			day.dayType = 5;
+		day.isVacation = !day.isVacation;
 	};
 
 	$scope.saveAndPrint = function() {
-		$scope.timesheet.days = $scope.days;
+		$scope.timesheet.days = calendarService.filterDays( $scope.days );
 		var date = moment();
 		$scope.timesheet.date = {
 			month: date.month() + 1,
@@ -70,6 +69,10 @@ angular.module('tt-bc')
 	}
 
 	$scope.timesheet = loadBasicData();
+	$scope.infoVisible = true;
+	$scope.hideInfo = function() {
+		$scope.infoVisible = false;
+	};
 }])
 .filter('monthName', function() {
   var monthsHashTable = {
@@ -91,17 +94,6 @@ angular.module('tt-bc')
       return null;
 
     return monthsHashTable[monthNo];
-  };
-})
-.filter('dayTypeName', function() {
-  var typeNamesHashTable = {
-    '5': 'Urlop'
-  };
-  return function(dayType) {
-    if(!dayType)
-      return null;
-
-    return typeNamesHashTable[dayType];
   };
 })
 .filter('capitalize', function() {

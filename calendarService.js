@@ -12,8 +12,6 @@ angular.module('tt-bc')
     { month: 12, day: 26, name: 'Boże Narodzenie' }
   ];
 
-  var HOLIDAY = 1;
-
   var easters = {
     2016: { month: 3, day: 28 },
     2017: { month: 4, day: 16 }
@@ -28,29 +26,32 @@ angular.module('tt-bc')
     return easter;
   }
 
+  function findHolidays(month, year) {
+    var result = [];
+    var holidays = angular.copy(constHolidays);
+
+    holidays.push(findEaster(year));
+
+    angular.forEach(holidays, function(el) {
+      if(month !== el.month)
+        return;
+
+      result.push(el);
+    });
+
+    return result;
+  }
+
   return {
-    findHolidays: function(month, year) {
-      var result = [];
-
-      constHolidays.push(findEaster(year));
-
-      angular.forEach(constHolidays, function(el) {
-        if(month !== el.month)
-          return;
-
-        result.push(el);
-      });
-
-      return result;
-    },
-
-    fillDays: function(days) {
-      var month = days.last().date.month() + 1;
-      var thisMonthHolidays = constHolidays.filter(function(el) { return el.month === month; });
+    fillDays: function(days, date) {
+      var month = date.month() + 1;
+      var year = date.year();
+      var holidays = findHolidays(month, year);
+      var thisMonthHolidays = holidays.filter(function(el) { return el.month === month; });
       days.forEach(function(el) {
         for (var i = 0; i < thisMonthHolidays.length; i++) {
           if(el.label === thisMonthHolidays[i].day) {
-            el.dayType = HOLIDAY;
+            el.isHolidays = true;
             el.dayDesc = thisMonthHolidays[i].name;
             break;
           }
@@ -58,6 +59,10 @@ angular.module('tt-bc')
       });
 
       return days;
+    },
+
+    filterDays: function(days) {
+      return days.filter(function(el) { return el.inMonth; });
     }
   };
 });

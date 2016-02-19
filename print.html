@@ -15,9 +15,9 @@
       <a href="/" class="btn btn-sm btn-default pull-left ng-scope" title="Kliknij aby powrócić do poprzedniego formularza" data-placement="right" data-type="warning">
         <span class="glyphicon glyphicon-hand-left"></span>
       </a>
-      <div class="alert alert-info pull-right">
+      <div class="alert alert-info pull-right" ng-show="infoVisible">
         <span class="glyphicon glyphicon-print"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-left: 16px;">×</button>
+        <button type="button" class="close" aria-hidden="true" style="margin-left: 16px;" ng-click="hideInfo()">×</button>
         Wygląda w porządku? To drukuj stronę! (Ctrl+P)
       </div>
     </div>
@@ -64,15 +64,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="day in timesheet.days" ng-class="{'day-off': day.dayType > 0 && day.dayType < 4, 'day-vacation': day.dayType == 5}">
+          <tr ng-repeat="day in timesheet.days" ng-class="{'day-off': day.isHolidays || day.isWeekend, 'day-vacation': day.isVacation}">
             <td>{{day.label}}</td>
-            <td>{{ (!day.dayType) ? timesheet.basic.projectName : ''}} {{day.dayType == 5 ? 'Urlop' : '' }}</td>
+            <td>{{ (!day.isHolidays && !day.isWeekend && !day.isVacation) ? timesheet.basic.projectName : (day.dayDesc || '') }} {{ day.isVacation ? 'Urlop' : '' }}</td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
             <td class="cell-x"></td>
-            <td>{{ (!day.dayType) ? '8h' : '' }}</td>
+            <td>{{ (!day.isHolidays && !day.isWeekend && !day.isVacation) ? '8h' : '' }}</td>
           </tr>
         </tbody>
         <tfoot>
