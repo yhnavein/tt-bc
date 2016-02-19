@@ -84,7 +84,7 @@
 }
 .calendar .calDay.vacation {
 	background: #CDCDE0;
-	background: -webkit-gradient(linear, left top, left bottom, from(#E7E8F3), to(#CDCDE0));
+	background: url('palm_tree.png') no-repeat 27px 18px, -webkit-gradient(linear, left top, left bottom, from(#E7E8F3), to(#CDCDE0));
 }
 .calendar .calDay.holidays {
 	background: #CDCDE0;
