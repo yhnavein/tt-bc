@@ -7,6 +7,8 @@ angular.module('tt-bc')
 	$scope.curDate = moment();
 	$scope.curDateJs = moment().toDate();
 
+	var lastVacationDay = null;
+
 	$scope.weekDays = [
 		'Poniedziałek',
 		'Wtorek',
@@ -35,12 +37,30 @@ angular.module('tt-bc')
 		});
 	}
 
+	function fillVacationDays(from, to, val) {
+		for (var i = 0; i < $scope.days.length; i++) {
+			var d = $scope.days[i];
+
+			if(d.inMonth && d.label >= from && d.label <= to && !d.isHolidays && !d.isWeekend)
+				d.isVacation = val;
+		}
+	}
+
 	$scope.saveBasicData = function() {
 		localStorage.setItem('basicData', JSON.stringify($scope.timesheet.basic));
 	};
 
-	$scope.markVacation = function(day) {
-		day.isVacation = !day.isVacation;
+	$scope.markVacation = function($event, day) {
+		console.log($event);
+		if($event.shiftKey && lastVacationDay) {
+			var from = Math.min(lastVacationDay.label, day.label);
+			var to = Math.max(lastVacationDay.label, day.label);
+
+			fillVacationDays(from, to, !day.isVacation);
+		} else {
+			day.isVacation = !day.isVacation;
+		}
+		lastVacationDay = day;
 	};
 
 	$scope.saveAndPrint = function() {

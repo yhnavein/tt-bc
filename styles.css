@@ -21,6 +21,10 @@
 	width: 720px;
 	box-sizing: border-box;
 }
+.cal-container {
+	border-left: 1px solid #ccc;
+	margin-bottom: 12px;
+}
 
 .weekDays .weekDay {
 	float: left;

@@ -61,18 +61,24 @@
           {{curMonth | monthName | capitalize}} {{curDateJs | date:'yyyy'}}
         </h2>
 
-        <div class="weekDays">
-          <div class="weekDay" ng-repeat="weekDay in weekDays">{{weekDay}}</div>
-        </div>
+        <div class="cal-container clearfix">
+          <div class="weekDays">
+            <div class="weekDay" ng-repeat="weekDay in weekDays">{{weekDay}}</div>
+          </div>
 
-        <div class="calDay" ng-repeat="day in days" ng-class="{'outside-scope': !day.inMonth, 'weekend': day.isWeekend, 'vacation': day.isVacation, 'holidays': day.isHolidays}">
-          <div class="day">{{day.label}}</div>
-          <div class="title" ng-show="day.dayDesc">{{day.dayDesc}}</div>
+          <div class="calDay" ng-repeat="day in days" ng-class="{'outside-scope': !day.inMonth, 'weekend': day.isWeekend, 'vacation': day.isVacation, 'holidays': day.isHolidays}">
+            <div class="day">{{day.label}}</div>
+            <div class="title" ng-show="day.dayDesc">{{day.dayDesc}}</div>
 
-          <div class="controls" ng-hide="!day.inMonth">
-            <a class="btn btn-xs btn-default" ng-click="markVacation(day)" ng-class="{'btn-primary': day.isVacation}">Urlop</a>
+            <div class="controls" ng-hide="!day.inMonth">
+              <a class="btn btn-xs btn-default" ng-click="markVacation($event, day)" ng-class="{'btn-primary': day.isVacation}">Urlop</a>
+            </div>
           </div>
         </div>
+        <p class="text-muted">
+          <i class="fa fa-question-circle"></i>
+          Dłuższy urlop? Zaznacz pierwszy dzień urlopu, przytrzymaj <kbd>shift</kbd> i wybierz ostatni dzień nieobecności.
+        </p>
       </div>
 
       <div class="main-controls">
