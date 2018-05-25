@@ -14,7 +14,9 @@ angular.module('tt-bc')
 
   var easters = {
     2016: { month: 3, day: 28 },
-    2017: { month: 4, day: 16 }
+    2017: { month: 4, day: 16 },
+    2018: { month: 4, day: 1 },
+    2019: { month: 4, day: 21 }
   };
 
   function findEaster(year) {
