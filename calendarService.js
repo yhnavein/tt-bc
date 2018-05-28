@@ -16,7 +16,18 @@ angular.module('tt-bc')
     2016: { month: 3, day: 28 },
     2017: { month: 4, day: 16 },
     2018: { month: 4, day: 1 },
-    2019: { month: 4, day: 21 }
+    2019: { month: 4, day: 21 },
+    2020: { month: 4, day: 12 },
+    2021: { month: 4, day: 4 }
+  };
+
+  var corpusChristis = {
+    2016: { month: 5, day: 26 },
+    2017: { month: 6, day: 15 },
+    2018: { month: 5, day: 31 },
+    2019: { month: 5, day: 20 },
+    2020: { month: 6, day: 11 },
+    2021: { month: 6, day: 3 }
   };
 
   function findEaster(year) {
@@ -28,11 +39,21 @@ angular.module('tt-bc')
     return easter;
   }
 
+  function findCorpusChristi(year) {
+    var holiday = corpusChristis[year];
+
+    if(holiday)
+      holiday.name = 'Boże Ciało';
+
+    return holiday;
+  }
+
   function findHolidays(month, year) {
     var result = [];
     var holidays = angular.copy(constHolidays);
 
     holidays.push(findEaster(year));
+    holidays.push(findCorpusChristi(year));
 
     angular.forEach(holidays, function(el) {
       if(month !== el.month)
@@ -51,6 +72,9 @@ angular.module('tt-bc')
       var holidays = findHolidays(month, year);
       var thisMonthHolidays = holidays.filter(function(el) { return el.month === month; });
       days.forEach(function(el) {
+        if(!el.inMonth) {
+          return;
+        }
         for (var i = 0; i < thisMonthHolidays.length; i++) {
           if(el.label === thisMonthHolidays[i].day) {
             el.isHolidays = true;
